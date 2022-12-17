@@ -1,5 +1,7 @@
 {
+    
   "compilerOptions": {
+    "preserveConstEnums": true,
     "target": "es5",
     "lib": [
       "dom",
@@ -18,9 +20,28 @@
     "resolveJsonModule": true,
     "isolatedModules": true,
     "noEmit": true,
-    "jsx": "react-jsx"
+    "jsx": "preserve"
+    
   },
+  "files": [
+    "core.ts",
+    "sys.ts",
+    "types.ts",
+    "scanner.ts",
+    "parser.ts",
+    "utilities.ts",
+    "binder.ts",
+    "checker.ts",
+    "emitter.ts",
+    "program.ts",
+    "commandLineParser.ts",
+    "tsc.ts",
+    "diagnosticInformationMap.generated.ts"
+  ],
   "include": [
-    "src"
-  ]
+    "src/**/*",
+  ],
+  "exclude": [
+    "node_modules", "**/*.spec.ts"
+]
 }
