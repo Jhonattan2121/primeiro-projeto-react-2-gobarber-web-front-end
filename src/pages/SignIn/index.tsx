@@ -1,10 +1,12 @@
-import React, {useRef, useCallback, useContext} from 'react';
+/* eslint-disable @typescript-eslint/no-unused-vars */
+/* eslint-disable @typescript-eslint/no-unused-expressions */
+import React, {useRef, useCallback} from 'react';
 import { FiLogIn, FiMail, FiLock } from 'react-icons/fi';
 import { Form } from '@unform/web';
 import { FormHandles } from '@unform/core';
 import * as Yup from 'yup';
 
-import {AuthContext} from '../../context/AuthContext';
+import {useAuth} from '../../hooks/AuthContext';
 import getValidationErrors from '../../utils/getValidationErrors';
 
 import logoImg from "../../assets/logo.svg";
@@ -23,7 +25,10 @@ interface SigninFormData {
 const Signin: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
 
-    const {signIn} = useContext(AuthContext);
+    const {signIn} = useAuth();
+
+    
+
 
     const handleSubmit = useCallback(async (data: SigninFormData) => {
         try {
@@ -43,15 +48,19 @@ const Signin: React.FC = () => {
 
             signIn({
                 email: data.email,
-                passowrd: data.password,
+                password: data.password,
             });
 
         } catch (err: any) {
+            if (err instanceof Yup.ValidationError) {
             const errors = getValidationErrors(err);
 
             formRef.current?.setErrors(errors);
+            }
+            
         }
-    }, [signIn],
+    }, 
+    [signIn],
     );
 
     return(
