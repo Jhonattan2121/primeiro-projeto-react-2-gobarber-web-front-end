@@ -1,5 +1,8 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack'); //to access built-in plugins
+const createStyledComponentsTransformer = require('typescript-plugin-styled-components').default;
+const styledComponentsTransformer = createStyledComponentsTransformer();
+
 const path = require('path');
 
 module.exports = {
@@ -12,6 +15,10 @@ module.exports = {
     rules: [
       {
         test: /\.(js|jsx)$/,
+        loader: 'awesome-typescript-loader',
+                options: {
+                    getCustomTransformers: () => ({ before: [styledComponentsTransformer] })
+                },
         use: 'babel-loader',
       },
     ],

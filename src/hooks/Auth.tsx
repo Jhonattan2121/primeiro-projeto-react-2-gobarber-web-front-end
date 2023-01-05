@@ -14,6 +14,7 @@ interface SignInCredentials {
 
 interface Props {
     children?: React.ReactNode;
+    
 }
 
 interface AuthContextData {
@@ -22,6 +23,7 @@ interface AuthContextData {
     signOut(): void;
 
 }
+
 
 const AuthContext = createContext<AuthContextData>(
     {} as AuthContextData);
