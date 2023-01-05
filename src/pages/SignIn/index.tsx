@@ -10,7 +10,7 @@ import logoImg from "../../assets/logo.svg";
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import * as Yup from 'yup';
-import { Link } from 'react-router-dom';
+import { Link , useHistory } from 'react-router-dom';
 import { useToast } from '../../hooks/Toast';
 
 interface SigninFormData {
@@ -23,6 +23,8 @@ const Signin: React.FC = () => {
     const formRef = useRef<FormHandles>(null);
     const {signIn} = useAuth();
     const { addToast } = useToast();
+
+    const history = useHistory();
 
     const handleSubmit = useCallback(async (data: SigninFormData) => {
         try {
@@ -45,6 +47,7 @@ const Signin: React.FC = () => {
                 password: data.password,
             });
 
+            history.push('/Dashboard');
         } catch (err: any) {
             if (err instanceof Yup.ValidationError) {
             const errors = getValidationErrors(err);
@@ -60,7 +63,7 @@ const Signin: React.FC = () => {
             });
         }
     }, 
-    [signIn, addToast],
+    [signIn, addToast , history],
     );
 
     return(

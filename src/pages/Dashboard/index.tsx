@@ -1,5 +1,5 @@
 import React from "react";
 
-const Dashboard: React.FC = () => <h1>Dashboard</h1>;
+const dashboard: React.FC = () => <h1>Dashboard</h1>;
 
-export default Dashboard;
+export default dashboard;
